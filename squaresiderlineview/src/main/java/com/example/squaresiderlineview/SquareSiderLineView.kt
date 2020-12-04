@@ -206,4 +206,13 @@ class SquareSiderLineView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : SquareSiderLineView {
+            val view : SquareSiderLineView = SquareSiderLineView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
