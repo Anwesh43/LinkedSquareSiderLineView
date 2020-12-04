@@ -181,4 +181,27 @@ class SquareSiderLineView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : SquareSiderLineView) {
+
+        private val animator : Animator = Animator(view)
+        private val ssl : SquareSiderLine = SquareSiderLine(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            ssl.draw(canvas, paint)
+            animator.animate {
+                ssl.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            ssl.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
