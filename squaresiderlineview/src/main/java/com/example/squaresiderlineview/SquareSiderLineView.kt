@@ -41,9 +41,14 @@ fun Canvas.drawSquareSiderLine(scale : Float, w : Float, h : Float, paint : Pain
     save()
     translate(w / 2, h / 2)
     rotate(rot * sf4)
-    drawLine(0f, 0f, -size * 0.5f * sf1, 0f, paint)
-    drawLine(-size * 0.5f, 0f, -size * 0.5f, -size * 0.5f * sf2, paint)
-    drawRect(RectF(-size * 0.5f - size * 0.5f * sf3, -size * 0.5f, -size * 0.5f, 0f), paint)
+    for (j in 0..1) {
+        save()
+        scale(1f - 2 * j, 1f)
+        drawLine(0f, 0f, -size * 0.5f * sf1, 0f, paint)
+        drawLine(-size * 0.5f, 0f, -size * 0.5f, -size * 0.5f * sf2, paint)
+        drawRect(RectF(-size * 0.5f - size * 0.5f * sf3, -size * 0.5f, -size * 0.5f, 0f), paint)
+        restore()
+    }
     restore()
 }
 
@@ -52,6 +57,7 @@ fun Canvas.drawSSLNode(i : Int, scale : Float, paint : Paint) {
     val h : Float = height.toFloat()
     paint.color = colors[i]
     paint.strokeCap = Paint.Cap.ROUND
+    paint.strokeWidth = Math.min(w, h) / strokeFactor
     drawSquareSiderLine(scale, w, h, paint)
 }
 
