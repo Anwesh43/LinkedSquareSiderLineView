@@ -1,0 +1,3 @@
+include ':squaresiderlineview'
+include ':app'
+rootProject.name = "LinkedSquareSiderLineView"
